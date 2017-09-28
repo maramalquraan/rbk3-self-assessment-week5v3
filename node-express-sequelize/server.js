@@ -10,10 +10,17 @@ var User = sequelize.define('User', {
 
 app.get('/users', function (req, res) {
 	User.findAll()
-	.then(function(users){
-		res.json(users);
+	.then(function(error, users){
+		if(error){
+			throw error;
+		}
+		else{
+			res.json(users);
+		}
 	});
-})
+});
+
+
 module.exports = { 
   app: app,
   User: User
